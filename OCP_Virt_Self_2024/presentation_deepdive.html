@@ -1,0 +1,336 @@
+<html lang="en">
+    <!-- 
+        Throughout this slide deck you will see a lot of empty div's. This is because I am using custom css grids with the following spacing:
+        1fr 10fr 1fr
+        This is to help deal with different screen/projector resolutions. It makes the code look slightly messy but I always want the main elements 
+        in the middle div so that it displays correctly. This is my first attempt at html/css in over 10 years. I am sure there are a lot of things 
+        that could be improved upon
+    -->
+    <head>
+        <title>OpenShift Virt - Deep Dive</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=1024">
+        <meta name="author" content="Steve Ovens">
+        <!-- I am using the css available from the impress.js github-->
+        <link href="css/impress-demo.css" rel="stylesheet">
+        <link href="css/classic-slides.css" rel="stylesheet">
+        <link href="css/mermaid.forest.css" rel="stylesheet">
+        <link href="css/github.css" rel="stylesheet">
+
+        <!-- These are my local css styles -->
+        <link href="css/local_custom.css" rel="stylesheet">
+        
+    </head>
+    <!-- This is required for impress.js to work properly-->
+    <body class="impress-not-supported" style="background-color: rgb(73, 72, 72)">
+        <!-- Set a fall back message. I am using the one from the demo because... why not?-->
+        <div class="fallback-message">
+            <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+            <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+        </div>
+
+        <div id="impress" style="perspective: 1000px;">
+            <!-- The Intro slide should show first-->
+            <div id="intro" class="readhatSpaceBackgroundSettings step slide" data-x="-15000" data-y="5000" data-rotate="150">
+                <h1 style="text-align: center;" data-mce-style="text-align: center;">&nbsp;<br></h1><h1 style="text-align: center;" data-mce-style="text-align: center;">&nbsp;<br></h1><h1 style="text-align: center;" data-mce-style="text-align: center;">
+                    <span style="font-size: 36pt; color: aliceblue" data-mce-style="font-size: 36pt;">OpenShift Virt -         
+                        <span style="color: rgb(153, 51, 0);" data-mce-style="color: #993300;">Deep </span> 
+                        
+                        <span style="color:darkblue;"> Dive</span>
+                        
+                    </span><br>
+                </h1>
+                <p style="text-align: left;" >&nbsp;<br><br><br><br><br></p>
+                <p style="text-align: center;" >
+                    <span style="font-size: 16pt; color:aliceblue" >Steve Ovens <br></span>
+                    <span style="font-size: 16pt; color:aliceblue" >SRE Architect <br></span>
+                    <span style="font-size: 16pt; color:aliceblue" >June 2024</span>
+                </p>
+                <div class="notes">
+                </div>
+            </div>
+            
+            <!-- Self Bio-->
+            <div id="what_is_ocp_virt" class="readhatSpaceBackgroundSettings step slide" data-x="0" data-y="0" data-z="0">
+                <div class="topCentre redText"><b>What Is OpenShift Virtualization?</b></div>
+                    <img src="images/kubernetes-logo.png" style=" width: 20%; height: 30%; position: relative; left: 1em; top: 3em">
+                    <img src="images/plus_sign.png" style=" width: 10%; height: 15%; position: relative; top: 2em; left: 2.5em"> 
+                    <img src="images/kubevirt_logo_white_text.png" style=" width: 20%; height: 30%; position: relative; top: 3em; left: 3.5em">
+                    <img src="images/equal_sign.png" style="width: 10%; height: 10%; position: relative; top: 1.6em; left: 4em">
+                    <img src="images/magic_hands.png" style=" width: 25%; height: 25%; position: relative; top: 2.75em; left: 5.5em">
+                    <div class="notes">
+                        <p>* OCP Virt combines K8S with Kube Virt to make magic happen!</p>
+                        <p>* It'd Be Nice To Have Single Platform</p>
+                        <p>* Modernization Of Stack</p>
+                    </div>
+            
+            </div>
+
+            <div id="history1" class="readhatOCPBackgroundSettings step slide" data-x="2000" data-y="0" data-z="1000">
+                <div class="topCentre redText"><b>It Used To Be Like</b></div>
+                <ul>
+                    <li class="substep"><img src="images/evolution_of_app_infra.png"  style=" width: 37%; height: 37%; position: relative; bottom: 1em"></li>
+                    <li class="substep"><img src="images/red-arrow_down.png"  style=" width: 10%; height: 15%; position: relative; bottom: 1em; left: 5em" ></li>
+                    <li class="substep"><img src="images/evolution_of_app_infra2.png" style=" width: 37%; height: 37%; position: relative; bottom: 1em"></li>
+                </ul>
+                <div class="notes">
+                    <p>* Back in the old days we had only a few servers</p>
+                    <p>* Then we eventually migrated to multiple sets of machines and put an LB in place</p>
+                    <p>* The next step was to move to VMs</p>
+                    <p>* I collapsed the running of containers and vms into 1 segment (this is not k8s necessarily)</p>
+                    <p>* Eventually moving to a unified platform that hosts vms and containers is likely the future</p>
+                </div>
+                
+            </div>
+
+            <div id="node_level" class="darkWithSpotsSettings step slide" data-x="4000" data-y="0" data-z="2000">
+                <div class="topCentre redText"><b>What It Looks Like: Node Level</b></div>
+                <div>
+                    <img src="images/ocp_virt_pod_overview.png" style="height: 80%; width: 65%; position: relative; left: 8em; top: 1.5em">
+                </div>
+                <div class="notes">
+                    <p>* There is a host that is running OCP</p>
+                    <p>* There is the API/CLI which communicates to kubevirt</p>
+                    <p>* kubevirt spins up a pod with libvirt, QUEM/KVM and a vm in the same container</p>
+                    <p> NOTE: this is possible because of how namespaces work!</p>
+                </div>
+            </div>
+
+            <div id="component_view" class="squaresBackgroundSettings step slide" data-x="6000" data-y="0" data-z="3000">
+                    <div class="topCentre redText"><b>What It Looks Like: Component View</b></div>
+                    <div>
+                        <img src="images/oct_virt_architecture.png"  style="height: 80%; width: 100%; position: relative; top: 1em">
+                    </div>
+
+                    <div class="notes">
+                        <p>* there is a specific virtualization API</p>
+                        <p>* the virt controller understands node hardware and handles scheduling</p>
+                        <p>* the virt handler receives instructions from the controller</p>
+                        <p>* the handler talks to the launcher</p>
+                        <p>* the lancher then interacts with libvirt to create vms</p>                        
+                        <p>* launcher, kubevirt and the actual VM are running inside of a pod</p>
+                    </div>
+            </div>
+            
+            <div id="cluster_view" class="squaresBackgroundSettings step slide" data-x="8000" data-y="0" data-z="4000">
+                <div class="topCentre redText"><b>What It Looks Like: Cluster View</b></div>
+                <ul>
+                    <li class="substep whiteText">* Everything in K8S is a resource</li>
+                    <li class="substep whiteText">* Sometimes you need something non-standard</li>
+                    <li class="substep whiteText">* A CRD sets a template for the type of resource you want</li>
+                    <li class="substep whiteText">* Think of it like a custom class in a programming language</li>
+                    <li class="substep" style="position: relative; top: 1em">
+                        <img src="images/camera_crd.png" style="position: relative; left: 3em">
+                        <img src="images/sensor_crd.png" style="position: relative; left: 6em">
+                    </li>    
+                </ul>
+                <div class="notes">
+                    <p>* everything is a resource </p>
+                    <p>* need a non-standard resource</p>
+                    <p>* CRD is a template</p>
+                    <p>* like a programming class</p>
+                    <p>* NS: a CRD can have whatever attributes you want</p>
+                    <p>* NS: very similar to DNS controlls how we look and behave; CRDS perform a similar function</p>
+                    <p>* NS: this allows you to extend K8S without rebuilding it</p>
+                </div>
+            </div>
+
+            <div id="operators" class="step slide" data-x="7000" data-y="0" data-z="1500">
+                    <div class="topCentre redText"><b>Briefly: Operators</b>
+                    </div>
+                    <div>
+                        <img src="images/k8s-operator_overview.png" style="position: relative; height: 80%; width: 100%; top: 2em">
+                    </div>
+                    <div class="notes">
+                        <p>* An operator is a custom controller</p>
+                        <p>* it has business logic and understands how the app needs to deploy</p>
+                        <p>* You instantiate a custom resource from your CRD</p>
+                        <p>* it has specifics (like number of pods etc)</p>
+                        <p>* the operator reads the CR and then talks to the API to ensure they exist (sort of like Anisble)</p>
+                    </div>
+            </div>
+
+            <div id="which_crs" class="readhatOCPBackgroundSettings step slide" data-x="7000" data-y="0" data-z="0">
+                <div class="topCentre whiteText"><b>VM Custom Resources</b></div>
+                    <ul style="position: relative; top: 3em">
+                        <li class="substep whiteText">* VirtualMachine (the vm definition)</li>
+                        <li class="substep whiteText">* VirtualMachineInstance (the running vm)</li>
+                        <li class="substep whiteText">* VirtualMachineInstanceMigration</li>
+                        <li class="substep whiteText">* VirtualMachineSnapshot</li>
+                        <li class="substep whiteText">* DataVolume</li>
+                    </ul>
+                <div class="notes">
+                    <p>* VirtualMachine (the vm definition)</p>
+                    <p>* VirtualMachineInstance (the running vm)</p>
+                    <p>* VirtualMachineInstanceMigration</p>
+                    <p>* VirtualMachineSnapshot</p>
+                    <p>* DataVolume (use the containerized data importer to connect, download and prepare disk image)</p>
+                </div>
+            </div>
+
+            <div id="how_vms" class="darkWithSpotsSettings step slide" data-x="5000" data-y="0" data-z="0">
+                <div class="topCentre redText"><b>VM Specifics</b>
+                </div>
+                <img src="images/Running-sysprep.png" style="height: 50%; width: 50%; position: relative; right: 1em; top: 3em">
+                <img src="images/cloudinit.png" style="height: 50%; width: 50%; position: relative; left: 18em; bottom: 11em">
+                <img src="images/pxe.png" style="height: 35%; width: 35%; position: relative; left: 3em; bottom: 3em">
+
+                <div class="notes">
+                    <p>* You can install a VM in the normal ways (sysprep, cloud-init, PXE etc)</p>
+                </div>
+            </div>
+
+            <div id="how_vms2" class="darkWithSpotsSettings step slide" data-x="7000" data-y="0" data-z="-1500">
+                <div class="topCentre redText"><b>VM Specifics Cont...</b></div>
+                <img src="images/Ephemeral.jpg" style="position: relative; height: 50%; width: 40%; top: 3em">
+                <img src="images/url_download.jpg" style="position: relative; height: 50%; width: 40%; top: 3em; left: 4em">
+                <div class="notes">
+                    <p>* You can treat vms like pods with Ephemeral disks</p>
+                    <p>* you can also download disk images from an endpoint</p>
+                </div>
+            </div>
+
+            <div id="how_vms3" class="step slide"  data-x="7000" data-y="0" data-z="-3000">
+                <div class="topCentre redText"><b>More VM Specifics</b></div>
+                <img src="images/CDI_importer.png" style="position: relative; height: 80%; width: 80%; left: 3em; top: 1em">    
+                <div class="notes">
+                    <p>* Datavolumes are abstraction lay on top of pvcs</p>
+                    <p>* They can point at: <br>
+                    * * a PVC to clone a volume <br>
+                        * * a URL for an ISO or cloud image <br>
+                        * * container registry <br>
+                        * * vcenter <br>
+                        * * an upload from virtctl<br>
+                        * * blank </p>
+                    <p> CDI deals with importing data source</p>                    
+                </div>
+            </div>
+
+            <div id="live_migrate" class="step " data-x="7000" data-y="0" data-z="-4500">
+                <!--<div class="topCentre whiteText"><b>Live Migrations</b></div> -->
+                <img src="images/portal-game.jpg" style="position: relative; height: 100%; width: 100%">
+                <div class="notes">
+                    <p>* Kubevirt uses K8s scheduling rules (selectors, taints etc)</p>
+                    <p>* Kubevirt intercepts eviction events, rejects them and then starts migration <br>
+                         * a new pod with a libvirt stack is spun up on a different node
+                         * libvirt then handles vm migration
+                    </p>
+                    <p> * NOTE: vms request the full amount of ram but only 10% CPU</p>
+
+                </div>
+            </div>
+
+            <div id="how_help" class="darkWithCracksSettings step slide" data-x="7000" data-y="1000" data-z="-4500" data-rotate="180">
+                <span style="font-size: 48pt; color: rgb(8, 132, 241); position: relative; left: 2.5em; top: 3.5em" data-mce-style="font-size: 48pt;">How 
+                    <span style="color: rgb(252, 251, 250);" data-mce-style="color: #993300;">Does This Help </span>         
+                    <span style="color: rgb(153, 51, 0);" data-mce-style="color: #993300;">YOU? </span> 
+                </span>            
+            </div>
+            
+            <div id="simplify" class="step" data-x="7500" data-y="2600" data-z="-5000" data-rotate="150">
+                <img src="images/Simplify_Everything.jpg" style="position: relative; height: 100%; width: 100%">
+                <div class="notes">
+                    <p>* Gives a unified platform for VMs & Containers
+                    * as well as AI if you need it
+                    </p>
+                    <p>* Reduces the training costs as well as auditing
+                    * streamlines interfaces, APIs and automations
+                    </p>
+                </div>    
+            </div>
+
+
+            <div id="one_ring" class="step" data-x="8600" data-y="3100" data-z="-5500" data-rotate="120">
+                <img src="images/one_ring_to_rule.jpg" style="position: relative; height: 100%; width: 100%">
+                <div class="notes">
+                    <p>* Don't under estimate the "single plane of glass" when it comes to problems
+                    </p>
+                </div>    
+            </div>
+
+            <div id="declarative" class="step" data-x="9600" data-y="2600" data-z="-6000" data-rotate="90">
+                <img src="images/bankruptcy.jpg" style="position: relative; height: 100%; width: 100%">
+                <div class="notes">
+                    <p>* OpenShift allows you to move to a declarative infrastracture
+                        * this means that you can describe the state, similar to how Ansible works  
+                    </p>
+                    <p>* You can use configmaps and secrets inside of vms!
+
+                    </p>
+                </div>    
+            </div>
+
+
+            <div id="take_your_time" class="step" data-x="10600" data-y="2100" data-z="-6000" data-rotate="70">
+                <img src="images/take_your_time.jpg" style="position: relative; height: 100%; width: 100%">
+                <div class="notes">
+                    <p>* Allows you to migrate/modernize as you are ready
+                        * transitioning to a new platform or way of working is a lot of work
+                    </p>
+                    <p>* changing too much at once can be disruptive to the business
+
+                    </p>
+                </div>    
+            </div>
+
+
+
+            <div id="windows_build_chain" class="step" data-x="11600" data-y="1500" data-z="-7000" data-rotate="50">
+                <img src="images/build_chain.jpg" style="position: relative; height: 100%; width: 100%">
+                <div class="notes">
+                    <p>* Traditionally, windows build chains can't live on container platform  
+                    </p>
+                    <p>* You can now do all your builds/tests on the same platform
+                        * this can be a huge boon for standardization
+                    </p>
+                </div>    
+            </div>
+
+            <div id="final_thoughts" class="step" data-x="13600" data-y="1500" data-z="-7000" data-rotate="50">
+                <img src="images/final_thoughts.jpg" style="position: relative; height: 100%; width: 100%">
+                <div class="notes">
+                    <p>* OCP Virt builds on KVM  
+                    </p>
+                    <p>* It uses K8S CRDs to extend the platform for new types of resources<br>
+                        * It simplifies management in mixed pod/vm env<br>
+                        * * less training <br>
+                        * * unified auditing <br>
+                        * it modernizes the platform; all software needs to be upgraded<br>
+                        * avoid vendor lock in with open source <br>
+                        * ability to influence product direction 
+                    </p>
+                </div>    
+            </div>
+
+            <div id="sources" class="readhatSpaceBackgroundSettings step slide" data-x="14600" data-y="1500" data-z="-7000" data-rotate="50">
+                <h1 style="text-align: center;" ></h1> 
+                    <span style="text-align: center; position: relative; left: 9em; font-size: 36pt; color: aliceblue" data-mce-style="font-size: 36pt;">Sources
+                    </span><br><br>
+                    <a href="https://www.youtube.com/watch?v=JniNepFJHLs">Intro to KubeVirt </a><br>
+                    <a href="https://www.youtube.com/watch?v=yfZ6CCwoR_M">OpenShift Virtualization: Run VMs on OpenShift with KubeVirt</a><br>
+                    <a href="https://www.youtube.com/watch?v=RWhaC8LKP70">Running VMs on Raspberry Pi Using Kubevirt</a><br>
+                    <a href="https://www.youtube.com/watch?v=Z9hBIoO4KOs">KubeVirt Deep Dive</a><br>
+                    <a href="https://www.youtube.com/watch?v=C6savdOboDY">OpenShift Virtualization: OS and application deep dive</a><br>
+                    <a href="https://www.youtube.com/watch?v=oUm7yftZI20">Ask An OpenShift Admin - Dive into OpenShift Virt</a><br>
+                    <a href="https://www.youtube.com/watch?v=jp2XY-9MORM">KubeVirt and its networking</a><br>
+                    <a href="https://www.youtube.com/watch?v=2iHyrwz8ABE">Virtualization Getting Started</a><br>
+                    <a href="https://www.youtube.com/watch?v=TlHvYWVUZyc">Kubernetes Explained in 6 Minutes</a><br>
+            </div>
+            <div id="sources_cont" class="readhatSpaceBackgroundSettings step slide" data-x="15600" data-y="1500" data-z="-7000" data-rotate="50">
+                <h1 style="text-align: center;" ></h1> 
+                    <span style="text-align: center; position: relative; left: 9em; font-size: 36pt; color: aliceblue" data-mce-style="font-size: 36pt;">Sources
+                    </span><br><br>
+                    <a href="https://www.youtube.com/watch?v=PziYflu8cB8">Kubernetes Explained in 100 Seconds</a><br>
+                    <a href="https://www.youtube.com/watch?v=TScDYMym7LA">What are Custom Resource Definitions (CRDs) in Kubernetes</a><br>
+                    <a href="https://www.youtube.com/watch?v=B4EF52zY6EM">Unlocking the power of Kubernetes</a><br>
+                    <a href="https://www.youtube.com/watch?v=-9GNXAxA4Pc">High level overview of OpenShift Virtualization v4.14</a>
+                    <a href="https://www.youtube.com/watch?v=VI2lUBBmKJA">Red Hat OpenShift Virtualization Demo</a>
+                    <a href="https://www.youtube.com/watch?v=-xBSW8bNb-U">Automating Windows VM Creation with Openshift Virtualization</a>
+            </div>
+
+                <!-- These load the actual JS. In this case a relative path to a js folder-->
+        <script src="js/impress.js"></script>
+        <script>impress().init();</script>
+    
+    </div>
+</body></html>

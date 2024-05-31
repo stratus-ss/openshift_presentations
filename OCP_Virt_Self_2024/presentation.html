@@ -1,0 +1,189 @@
+<html lang="en">
+    <!-- 
+        Throughout this slide deck you will see a lot of empty div's. This is because I am using custom css grids with the following spacing:
+        1fr 10fr 1fr
+        This is to help deal with different screen/projector resolutions. It makes the code look slightly messy but I always want the main elements 
+        in the middle div so that it displays correctly. This is my first attempt at html/css in over 10 years. I am sure there are a lot of things 
+        that could be improved upon
+    -->
+    <head>
+        <title>OpenShift Virt - Using Kubernetes For Your Virtualization Needs</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=1024">
+        <meta name="author" content="Steve Ovens">
+        <!-- I am using the css available from the impress.js github-->
+        <link href="css/impress-demo.css" rel="stylesheet">
+        <link href="css/classic-slides.css" rel="stylesheet">
+        <link href="css/mermaid.forest.css" rel="stylesheet">
+        <link href="css/github.css" rel="stylesheet">
+
+        <!-- These are my local css styles -->
+        <link href="css/local_custom.css" rel="stylesheet">
+        
+    </head>
+    <!-- This is required for impress.js to work properly-->
+    <body class="impress-not-supported" style="background-color: rgb(73, 72, 72)">
+        <!-- Set a fall back message. I am using the one from the demo because... why not?-->
+        <div class="fallback-message">
+            <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+            <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+        </div>
+
+        <div id="impress" style="perspective: 1000px;">
+            <!-- The Intro slide should show first-->
+            <div id="intro" class="readhatSpaceBackgroundSettings step slide" data-x="-15000" data-y="5000" data-rotate="150">
+                <h1 style="text-align: center;" data-mce-style="text-align: center;">&nbsp;<br></h1><h1 style="text-align: center;" data-mce-style="text-align: center;">&nbsp;<br></h1><h1 style="text-align: center;" data-mce-style="text-align: center;">
+                    <span style="font-size: 36pt; color: aliceblue" data-mce-style="font-size: 36pt;">OpenShift Virt - Using Kubernetes For        
+                        <span style="color: rgb(153, 51, 0);" data-mce-style="color: #993300;">Your</span> 
+                        Virtualization 
+                        <span style="color:darkblue;"> Needs</span>
+                        
+                    </span><br>
+                </h1>
+                <p style="text-align: left;" >&nbsp;<br><br><br><br><br></p>
+                <p style="text-align: center;" >
+                    <span style="font-size: 16pt; color:aliceblue" >Steve Ovens <br></span>
+                    <span style="font-size: 16pt; color:aliceblue" >SRE Architect <br></span>
+                    <span style="font-size: 16pt; color:aliceblue" >June 2024</span>
+                </p>
+                <div class="notes">
+                </div>
+            </div>
+            
+            <!-- Self Bio-->
+            <div id="who" class="archBackgroundSettings step slide" data-x="0" data-y="0" data-z="0">
+                <div class="topCentre redText"><b>Who Is This Guy?</b></div>
+                <p style="text-align: left;" >
+                    <br>
+                    <img src="images/Steve_and_Chewie.jpg" style="float: left; position: relative; bottom: 2em">
+                </p>
+                <div class="whiteText" style="position: relative; top: 14em; right: 10em; text-align: left">Twitter - @linuxovens</div>
+
+            </div>
+
+            <div id="problemStatement" class="backgroundSettings step slide" data-x="2000" data-y="0" data-z="1000">
+                <div class="topCentre redText"><b>What Are We Trying To Solve?</b></div>
+                <ul class="whiteText bulletFont" style="list-style-type: disc; position: relative; top: 3em">
+                    <li class="substep"> Combat Rising Prices</li>
+                    <li class="substep"> It'd Be Nice To Have Single Platform</li>
+                    <li class="substep"> Modernization Of Stack</li>
+                </ul>
+                <div>
+                    <img src="images/shrugging-young-man.png" style="height: 40%; width: 30%; position: relative; left: 27em; top: 3em">
+                </div>
+                <div>
+                    <img src="images/question_marks.png" style="height: 40%; width: 30%; position: relative; left: 27em; bottom: 14em">
+                </div>
+                <div class="notes">
+                    <p>* Combat Rising Prices</p>
+                    <p>* It'd Be Nice To Have Single Platform</p>
+                    <p>* Modernization Of Stack</p>
+                </div>
+            </div>
+
+            <div id="vmware" class="squaresBackgroundSettings step slide" data-x="4000" data-y="0" data-z="2000">
+                <div class="topCentre redText"><b>Post-Buyout Concerns</b></div>
+                <ul class="whiteText bulletFont" style="list-style-type: disc;">
+
+                </ul>
+                <div>
+                    <img src="images/vmware_logo.png" style="height: 40%; width: 50%; position: relative; right: 3em; top: 4.5em">
+                </div>
+                <div>
+                    <img src="images/Broadcom-logo.png" style="height: 40%; width: 50%; position: relative; left: 17em; bottom: 4.5em">
+                </div>
+                <div class="notes">
+                    <p>* Broadcom vowed to increase prices</p>
+                    <p>* Removed "free ESXi"</p>
+                    <p>* Signals that they aren't as dedicated to the platform</p>
+                    <p>* Despite walking back some of the announced changes, people remain skeptical</p>
+                </div>
+            </div>
+
+            <div id="modernization" class="squaresBackgroundSettings step" data-x="6000" data-y="0" data-z="3000">
+                    <img src="images/modernization_image.jpg"  style="height: 100%; width: 100%;">
+                    <div class="notes">
+                        <p>At some point software is due for a refresh</p>
+                        <p>Like Docker <--> podman, at first the goal is some level of feature parity</p>
+                        <p>This is an opportunity for the community to have direct input into features THEY want</p>
+                        <p>Most of the industry is centralizing around KVM: from hyper scalers to places like nutanix</p>
+                    </div>
+            </div>
+            
+            <div id="management" class="squaresBackgroundSettings step slide" data-x="8000" data-y="0" data-z="4000">
+                <img src="images/central_control_centre.jpg"  style="height: 100%; width: 110%; position: relative; right: 1.7em">
+                <div class="notes">
+                    <p>Most companies already have a container footprint</p>
+                    <p>Of those, a significant number have chosen Kubernetes of some description</p>
+                    <p>Being able to deploy vms in the same style (i.e. YAML based declaration) is a huge boon</p>
+                    <p>Having to have only one set of skill sets is hugely beneficial</p>
+                </div>
+            </div>
+
+            <div id="k8s_poll" class="backgroundSettings step slide" data-x="7000" data-y="0" data-z="1500">
+                    <div class="topCentre whiteText"><b>http://etc.ch/qRTk</b>
+                        <object style="position: relative; left: 3.5em" type="text/html" data="http://etc.ch/qRTk/?qr" width="1024px" height="768px"></object>   
+                    </div>
+            </div>
+
+            <div id="kubernetes" class="readhatOCPBackgroundSettings step slide" data-x="7000" data-y="0" data-z="0">
+                <div class="topCentre whiteText"><b>Container Management</b>
+                </div>
+                <img src="images/Container_diagram_generic.png" style="position: relative; top: 2em; left: 1.5em; height: 80%; width: 50%">
+                <div class="notes">
+                    <p>* Containers are just isolated Linux Namespaces</p>
+                    <p>* Any Linux OS can serve as the base for K8s</p>
+                    <p>* Since they are just NS, they all share the same host resources (including kernel)</p>
+                    <p>* K8s has a liveness daemon that will migrate or restart a pod when problems occur</p>
+                </div>
+            </div>
+
+            <div id="kubernetes2" class="readhatOCPBlackBackgroundSettings step slide" data-x="5000" data-y="0" data-z="0">
+                <div class="topCentre whiteText"><b>Container Management</b>
+                </div>
+                <img src="images/k8s_overview.png" style="position: relative; bottom: 1em; left: 6em; height: 90%; width: 70%">
+                <div class="whiteText" style="position: relative; left: 17em; bottom: 2em">
+                    <p style="font-size: 16">* Image: Kubernetes <br>
+                    Explained in 6 Minutes</p>
+                </div>
+                <div class="notes">
+                    <p>* K8s has an API, a scheduler and ETCD for tracking the state of the cluster</p>
+                    <p>* K8s deploys pods, not individual containers</p>
+                    <p>* Everything in a pod communicates over local host just like a VM with multiple services</p>
+                </div>
+            </div>
+
+            <div id="secrets" class=" step " data-x="7000" data-y="0" data-z="-1500">
+                <img src="images/secrets_locked.jpg" style="position: relative;  height:100%; width: 80%">
+                <div class="notes">
+                    <p>* Configuration, certs, ENV vars and files can be mounted to a pod</p>
+                    <p>* Config maps are plane text</p>
+                    <p>* Secrets are base64 encoded</p>
+                </div>
+            </div>
+
+            <div id="why_openshift" class="readhatOCPBackgroundSettings step slide " data-x="7000" data-y="0" data-z="-3000">
+                <img src="images/why_openshift.png" style="position: relative;  bottom: 1.35em; right: 2.2em; height:114%; width: 112%">
+                <div class="notes">
+                    <p>K8S can be very manual</p>
+                    <p>There is no one to call when you have problems</p>
+                    <p>Who tests all the pieces together during upgrades? How do you keep upgrades in sync?</p>
+                    <p>Need to add a lot of extras to make K8s "business ready"</p>
+                    <p>No need to manage the OS of the hosts</p>
+                    <p>Provides the same interface across cloud and local data centers</p>
+                    <p>Can do disconnected installs</p>
+                </div>
+            </div>
+
+            <div id="demo_or_deep_dive" class="backgroundSettings step slide" data-x="7000" data-y="0" data-z="-4500">
+                <div class="topCentre whiteText"><b>http://etc.ch/qRTk</b>
+                    <object style="position: relative; left: 3.5em" type="text/html" data="http://etc.ch/qRTk/?qr" width="1024px" height="768px"></object>   
+                </div>
+        </div>
+
+                <!-- These load the actual JS. In this case a relative path to a js folder-->
+        <script src="js/impress.js"></script>
+        <script>impress().init();</script>
+    
+    </div>
+</body></html>
