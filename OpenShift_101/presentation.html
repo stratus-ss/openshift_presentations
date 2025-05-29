@@ -1,0 +1,317 @@
+<html lang="en">
+    <!-- 
+        Throughout this slide deck you will see a lot of empty div's. This is because I am using custom css grids with the following spacing:
+        1fr 10fr 1fr
+        This is to help deal with different screen/projector resolutions. It makes the code look slightly messy but I always want the main elements 
+        in the middle div so that it displays correctly. This is my first attempt at html/css in over 10 years. I am sure there are a lot of things 
+        that could be improved upon
+    -->
+    <head>
+        <title>OpenShift 101:Kubernetes Fundamentals From A Red Hat Perspective</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=1024">
+        <meta name="author" content="Steve Ovens">
+        <!-- I am using the css available from the impress.js github-->
+        <link href="css/impress-demo.css" rel="stylesheet">
+        <link href="css/classic-slides.css" rel="stylesheet">
+        <link href="css/mermaid.forest.css" rel="stylesheet">
+        <link href="css/github.css" rel="stylesheet">
+        <!-- These are my local css styles -->
+        <link href="css/local_custom.css" rel="stylesheet">
+    </head>
+    <!-- This is required for impress.js to work properly-->
+    <body class="impress-not-supported" style="background-color: rgb(121, 91, 91);">
+        <!-- Set a fall back message. I am using the one from the demo because... why not?-->
+        <div class="fallback-message">
+            <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+            <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+        </div>
+
+        <div id="impress" style="perspective: 1000px;">
+            <div id="intro" class="readhatSpaceBackgroundSettings step slide" data-x="-15000" data-y="5000" data-rotate="150">
+                <h1 style="text-align: center;" data-mce-style="text-align: center;">&nbsp;<br></h1><h1 style="text-align: center;" data-mce-style="text-align: center;">&nbsp;<br></h1><h1 style="text-align: center;" data-mce-style="text-align: center;">
+                    <span style="font-size: 36pt; color: rgb(153, 51, 0)" data-mce-style="font-size: 36pt;">OpenShift 101:         
+                        <span style="color: darkblue;" data-mce-style="color: #993300;">Kubernetes Fundamentals </span> 
+                        
+                        <span style="color:rgb(153, 51, 0);"> From A Red Hat Perspective</span>
+                        
+                    </span><br>
+                </h1>
+                <p style="text-align: left;" >&nbsp;<br><br></p>
+                <p style="text-align: center;" >
+                    <span style="font-size: 18pt; color: black" >Steve Ovens <br></span>
+                    <span style="font-size: 18pt; color: black" >Sr. SRE Architect <br></span>
+                    <span style="font-size: 18pt; color:black" >June 2025</span>
+                </p>
+                <div class="notes">
+                </div>
+            </div> 
+            <div id="problem_1" class="backgroundSettings step slide" data-x="0" data-y="0" data-z="0">
+                <div>
+                    <img src="images/problem_statement.png" style="height: 100%; width: 100%; position: relative;" >                
+                </div>
+                <div class="notes">
+                    
+                </div>
+            </div>
+
+            
+            <div id="monoliths" class="step" data-x="-7200" data-y="6800" data-z="4000">
+                <div>
+                    <img src="images/monolith_applications.png" style="height: 130%; width: 130%; position: relative; right: 1em" >                
+                </div>
+                <div class="notes">
+                    <p>* we used to deploy monoliths on physical machines</p>
+                    
+                </div>
+            </div>
+
+            <div id="monolith_scaling" class="step"  data-x="-6200" data-y="4500" data-z="4000">
+
+                <div>
+                    <img src="images/monolith_scaling_problem.png" style="height: 130%; width: 130%; position: relative; right: 1em " >
+                </div>
+                <div></div>
+                <div class="notes">
+                    <p>* we moved deployment monoliths in vms </p>
+                    <p>* we solved the scaling problem by deployment multiple VMs </p>
+                    
+                </div>
+            </div>
+            
+            <div id="breaking_up_apps" class="slide step rippleBackgroundSettings"  data-x="-9600" data-y="5000" data-z="4000 data-rotate-x="180" data-rotate-y="00" data-rotate-z="300" data-rotate-order="xyz">
+                <div>
+                    <img src="images/monolith_broken_up.png" style="height: 100%; width: 100%; position: relative; " >
+                </div>
+                <div class="notes">
+                    <p>* we then moved to breaking up the application </p>
+                    
+                </div>
+            </div>
+
+            <div id="microservices_born" class="step"  data-x="-8200" data-y="5000" data-z="4000" data-rotate-x="180" data-rotate-y="00" data-rotate-z="300" data-rotate-order="xyz">
+                <div>
+                    <img src="images/birth_of_microservices.png" style="height: 130%; width: 130%; position: relative; right: 1em " >
+                </div>
+                <div></div>
+                <div class="notes">
+                    <p>* About the same time microservices were born  </p>
+                    
+                </div>
+            </div>
+
+            <div id="microservice_looks_like" class="step"  data-x="-6200" data-y="5000" data-z="4000" data-rotate-x="270" data-rotate-y="00" data-rotate-z="300" data-rotate-order="xyz">
+                <div>
+                    <img src="images/Red_Hat_Gallery_Traffic_Flow.png" style="height: 150%; width: 130%; position: relative; right: 1em " >
+                </div>
+                <div></div>
+                <div class="notes">
+                    <p> At the end of the day, no one actually cares about the platform </p>
+                    <p>The focus on SRE is all about the end user experience</p>
+                    <p>Traditional Operations KPIs (mostly) no longer apply</p>
+                    <p>reorients the focal point away from individual systems and performance towards the goal of making end user happy</p>
+                </div>
+            </div>
+
+
+            <div id="container_era" class="slide step rippleBackgroundSettings" data-x="1600" data-y="200" data-z="400">
+                <div>
+                    <img src="images/container_era.png" style="height: 100%; width: 100%; position: relative;" >
+                </div>
+                <div></div>
+                <div class="notes">
+                    <p>* combine microservices with Linux namespaces and we moved into the container era</p>
+                    
+                </div>
+            </div>
+
+
+
+            <div id="docker_great" class="slide step purpleBackgroundSettings" data-x="0" data-y="1200" data-z="100">
+                <div>
+                    <img src="images/docker_microservices.png" style="height: 100%; width: 100%; position: relative; " >
+                </div>
+                <div></div>
+                <div class="notes">
+                    <p>* Docker came along and it was great! </p>
+                    
+                </div>
+            </div>
+
+            <div id="single_host" class="step slide"  data-x="-7200" data-y="3000" data-z="4000">
+                <div>
+                    <img src="images/single_docker_host.png" style="height: 170%; width: 120%; position: relative; bottom: 7em; right: 2em" >
+                </div>
+                <div class="notes">
+                    <p>* but ultimately it did not scale or self heal the way that the industry wanted </p>
+                    <p>* how do you manage thousands of containers at scale across multiple servers? </p>
+                </div>
+            </div>
+
+            <div id="what_you_do_today" class=" step " data-x="2500" data-y="3600" data-z="600">
+                <div>
+                    <img src="images/openshift_kubernetes.png" style="height: 107%; width: 100%; position: relative;" >
+                </div>
+                <div></div>
+                <div class="notes">
+                </div>
+            </div>
+            <div id="now_what" class=" step " data-x="3000" data-y="1200" data-z="11100">
+
+                <div>
+                    <img src="images/great_now_what.png" style="height: 140%; width: 140%; position: relative; right: 2em" >
+                </div>
+                <div></div>
+                <div class="notes">
+                    <p>so what are the next steps?</p>
+                </div>
+            </div>
+            
+
+            <div id="generic_installation" class="slide step" data-x="-3000" data-y="1400" data-z="11100">
+                <div>
+                    <img src="images/generic_installation.png" style="height: 120%; width: 120%; position: relative; bottom: 2.5em; right: 3em" >
+                </div>
+                <div class="notes">
+                    <p>So now that you've picked a general direction you have a decision to make...</p>
+                    <p>What kubernetes distribution do you install?</p>
+                </div>
+            </div>
+
+            <div id="kubernetes_install" class="step slide"  data-x="3000" data-y="0" data-z="-3000">
+                <img src="images/installing_kubernetes.png" style="position: relative; height: 120%; width: 120%; right :2em; bottom: 2em">    
+                <div class="notes">
+                    <p>* Kubernetes can be very flexible</p>
+                    <p>* It's exciting and interesting to assemble all the pieces</p>
+                    <p>* Especially if you are following a use case similar to your own</p>
+                </div>
+            </div>
+
+            <div id="openshift_easy_install" class="step slide"  data-x="7000" data-y="0" data-z="-3000">
+                <img src="images/openshift_install.png" style="position: relative; height: 120%; width: 120%; right :2em; bottom: 2em">    
+                <div class="notes">
+                    <p>* What about at repeatable scale or if you can't find a similar use case?</p>
+                    <p>* * Which Networking stack do I use? How do I handle ingress? What do I do for logging? Monitoring? Alerting?</p>
+                    <p>* OpenShift has a few installation methods</p>
+                    <p>* IPI for the easy mode</p>
+                    <p>* UPI for more customization</p>
+                </div>
+            </div>
+
+            <div id="tested_upgrades" class="step " data-x="7000" data-y="0" data-z="-4500">
+                <!--<div class="topCentre whiteText"><b>Live Migrations</b></div> -->
+                <img src="images/openshift_upgrades.png" style="position: relative; height: 100%; width: 100%">
+                <div class="notes">
+                    <p>* Red Hat tests all the components and ships them as a release</p>
+                    <p>* There is a support team and thousands of businesses running your configuration</p>
+                    <p>* Kubernetes requires you to manage the upgrades of all the components</p>
+                </div>
+            </div>
+
+            <div id="architecture" class="darkWithCracksSettings step slide" data-x="7000" data-y="1000" data-z="-4500" data-rotate="180">
+                <img src="images/transition_to_architecture.png" style="position: relative; height: 100%; width: 100%">
+                <div class="notes">
+                    <p>* So what do you have after the cluster is installed?</p>
+                    <p>* Generally speaking you will have 3 control plane nodes</p>
+                    <p>* * These have scheduler, ETCD, API, Controller Manager etc</p>
+                    <p>* You will have N number of worker nodes that host the actual applications</p>
+                </div>         
+            </div>
+            
+            <div id="kublet" class="step" data-x="7500" data-y="2600" data-z="-5000" data-rotate="150">
+                <img src="images/kubelet_functionality.png" style="position: relative; height: 100%; width: 100%">
+                <div class="notes">
+                    <p>* Runs on every worker node.</p>
+                    <p>* Responsible for joining the node to the cluster.</p>
+                    <p>* Establishes a connection with the control plane.</p>
+                    <p>* Runs containers on the node as specified by pod specs.</p>
+                    <p>* Ensures containers are running and healthy (using health checks like liveness and readiness probes)</p>
+                    </p>
+                </div>    
+            </div>
+
+
+            <div id="openshift_node_security" class="step" data-x="8600" data-y="3100" data-z="-5500" data-rotate="120">
+                <img src="images/openshift_node_security_colour.png" style="position: relative; height: 100%; width: 100%">
+                <div class="notes">
+                    <p>* Node tries to join, issues certificate signing request</p>
+                    <p>* An admin needs to approve this to secure the cluster</p>
+                    <p>* Side note: certs are used for the internal cluster communication</p>
+                </div>    
+            </div>
+
+            <div id="api" class="step" data-x="9600" data-y="2600" data-z="-6000" data-rotate="90">
+                <img src="images/api_endpoint.jpg" style="position: relative; height: 100%; width: 100%">
+                <div class="notes">
+                    <p>* Everything is an API call</p>
+                    <p>* From the UI to the OC command line utility</p>
+                </div>    
+            </div>
+
+
+            <div id="running_applications" class="step" data-x="10600" data-y="2100" data-z="-6000" data-rotate="70">
+                <img src="images/running_applications.jpg" style="position: relative; height: 100%; width: 100%">
+                <div class="notes">
+                    <p>* Ultimately no one really cares about installing and managing a cluster</p>
+                    <p>* We want to run applications!</p>
+                </div>    
+            </div>
+
+
+
+            <div id="pods" class="step" data-x="11600" data-y="1500" data-z="-7000" data-rotate="50">
+                <img src="images/pods.png" style="position: relative; height: 100%; width: 100%">
+                <div class="notes">
+                    <p>* smallest unit in k8s</p>
+                    <p>* abstraction around containers so that you can talk in a standard way, regardless of the container or container run time</p>
+                    <p>* usually only 1 application per pod</p>
+                    <p>* Pods share resources such as volumes and IP addresses</p>
+                    <p>* Complex applications may consist of multiple pods</p>
+                    <p>* Pods are ephemeral by nature</p>
+                </div>    
+            </div>
+
+            <div id="deployments" class="step slide darkWithCracksSettings" data-x="13600" data-y="1500" data-z="-7000" data-rotate="50">
+                <div>
+                    <img src="images/deployment-yaml-diagram.gif" style="position: relative; height: 100%; width: 100%">
+                </div>
+                <div>
+                    <p style="position: relative; bottom: 1em">
+                        <span style="color: red"> * image from: https://matthewpalmer.net/</span>
+                    </p>
+                </div>
+                <div class="notes">
+                    <p>* OCP Virt builds on KVM  
+                    </p>
+                    <p>* It uses K8S CRDs to extend the platform for new types of resources<br>
+                        * It simplifies management in mixed pod/vm env<br>
+                        * * less training <br>
+                        * * unified auditing <br>
+                        * it modernizes the platform; all software needs to be upgraded<br>
+                        * avoid vendor lock in with open source <br>
+                        * ability to influence product direction 
+                    </p>
+                </div>    
+            </div>
+
+            <div id="end" class=" step " data-x="0" data-y="4200" data-z="100">
+                <div>
+                    <img src="images/the_end.jpg" style="height: 100%; width: 120%; position: relative; right: 1em" >
+                </div>
+                <div></div>
+            </div>
+            <div id="is_it" class=" step " data-x="-1500" data-y="-6800" data-z="1100" data-rotate-x="180" data-rotate-y="00" data-rotate-z="300" data-rotate-order="xyz">
+                <div class="redText topCentre"><b>Or Is It...?</b></div>
+            </div>
+
+            <!-- These load the actual JS. In this case a relative path to a js folder-->
+            <script src="js/impress.js"></script>
+            <script src="js/highlight.pack.js"></script>
+            <script>impress().init();</script>
+            <script>hljs.initHighlightingOnLoad();</script>
+    
+
+
+        </div>
+    </body
+></html>
