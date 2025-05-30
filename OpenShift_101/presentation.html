@@ -79,7 +79,7 @@
                 </div>
             </div>
             
-            <div id="breaking_up_apps" class="slide step rippleBackgroundSettings"  data-x="-9600" data-y="5000" data-z="4000 data-rotate-x="180" data-rotate-y="00" data-rotate-z="300" data-rotate-order="xyz">
+            <div id="breaking_up_apps" class="slide step rippleBackgroundSettings"  data-x="-12000" data-y="5300" data-z="4300 data-rotate-x="180" data-rotate-y="00" data-rotate-z="300" data-rotate-order="xyz">
                 <div>
                     <img src="images/monolith_broken_up.png" style="height: 100%; width: 100%; position: relative; " >
                 </div>
@@ -89,7 +89,7 @@
                 </div>
             </div>
 
-            <div id="microservices_born" class="step"  data-x="-8200" data-y="5000" data-z="4000" data-rotate-x="180" data-rotate-y="00" data-rotate-z="300" data-rotate-order="xyz">
+            <div id="microservices_born" class="step"  data-x="-8200" data-y="6000" data-z="5000" data-rotate-x="180" data-rotate-y="00" data-rotate-z="300" data-rotate-order="xyz">
                 <div>
                     <img src="images/birth_of_microservices.png" style="height: 130%; width: 130%; position: relative; right: 1em " >
                 </div>
@@ -148,7 +148,7 @@
                 </div>
             </div>
 
-            <div id="what_you_do_today" class=" step " data-x="2500" data-y="3600" data-z="600">
+            <div id="what_you_do_today" class=" step " data-x="2500" data-y="3600" data-z="1600">
                 <div>
                     <img src="images/openshift_kubernetes.png" style="height: 107%; width: 100%; position: relative;" >
                 </div>
@@ -281,29 +281,189 @@
                     </p>
                 </div>
                 <div class="notes">
-                    <p>* OCP Virt builds on KVM  
-                    </p>
-                    <p>* It uses K8S CRDs to extend the platform for new types of resources<br>
-                        * It simplifies management in mixed pod/vm env<br>
-                        * * less training <br>
-                        * * unified auditing <br>
-                        * it modernizes the platform; all software needs to be upgraded<br>
-                        * avoid vendor lock in with open source <br>
-                        * ability to influence product direction 
-                    </p>
+                    <p>* Declares desired state for pods</p>
+                    <p>* Includes things like: </p>
+                    <p>* * Networking </p>
+                    <p>* * Storage </p>
+                    <p>* * Number of replicas </p>
+                    <p>* * Health checks </p>
+                    <p>* * Number of replicas </p>
+                    <p>* * Resource Limits </p>
                 </div>    
             </div>
 
-            <div id="end" class=" step " data-x="0" data-y="4200" data-z="100">
+            <div id="scheduler" class=" step " data-x="0" data-y="4200" data-z="-800">
                 <div>
-                    <img src="images/the_end.jpg" style="height: 100%; width: 120%; position: relative; right: 1em" >
+                    <img src="images/scheduler.png" style="height: 100%; width: 120%; position: relative; right: 1em" >
                 </div>
-                <div></div>
-            </div>
-            <div id="is_it" class=" step " data-x="-1500" data-y="-6800" data-z="1100" data-rotate-x="180" data-rotate-y="00" data-rotate-z="300" data-rotate-order="xyz">
-                <div class="redText topCentre"><b>Or Is It...?</b></div>
+                <<div class="notes">
+                    <p>* Watches for new pod objects not already assigned</p>
+                    <p>* Looks at cpu/ram/affinity and places the pod on a node</p>
+                    <p>* * Filters for appropriate nodes</p>
+                    <p>* * Ranks the nodes</p>
+                    <p>* * Assigns node to highest ranking node</p>
+                </div>
             </div>
 
+            <div id="network_communications" class=" step " data-x="-1500" data-y="-6800" data-z="1100" data-rotate-x="180" data-rotate-y="00" data-rotate-z="300" data-rotate-order="xyz">
+                <div>
+                    <img src="images/network_communications.jpg" style="height: 100%; width: 120%; position: relative; right: 1em" >
+                </div>
+            </div>
+
+            <div id="kubeproxy" class="step" data-x="2200" data-y="-2800" data-z="-1000" data-rotate-x="270" data-rotate-y="00" data-rotate-z="300" data-rotate-order="xyz">
+                <div>
+                    <img src="images/kube_proxy.png" style="height: 100%; width: 120%; position: relative; right: 2em" >                
+                </div>
+                <div class="notes">
+                    <p>* Its a proxy that runs on every node</p>
+                    <p>* implements kubernetes service </p>
+                </div>
+            </div>
+            
+            <div id="services" class="slide step rippleBackgroundSettings"  data-x="-9600" data-y="5000" data-z="4000" >
+                <div>
+                    <img src="images/kubernetes_service.png" style="height: 100%; width: 100%; position: relative; " >
+                </div>
+                <div class="notes">
+                    <p>* while every pod gets an ip, that ip is not constant</p>
+                    <p>* therefore a service is like an internal dns entry</p>
+                    <p>* except multiple pods can be part of the same service</p>
+                </div>
+            </div>
+
+            <div id="foundation" class="slide step rippleBackgroundSettings"  data-x="-8200" data-y="5000" data-z="4000">
+                <div class="topCentre whiteText"><b>Starting Off Right</b></div>
+                <div>
+                    <img src="images/solid_foundation.jpg" style="height: 70%; width: 100%; position: relative; top: 2em; " >
+                </div>
+                <div class="notes">
+                    <p>It’s important to determine whether there are foundations in place to build from. </p>
+                    <p>doing some discovery before proceeding is necessary in order to set the customer up for future success</p>
+                    <p>Cannot lay a path on completely uneven terrain</p>
+                </div>
+            </div>
+
+            <div id="sum_greater" class="slide step "  data-x="-8200" data-y="8000" data-z="4000" data-rotate-x="180" data-rotate-y="00" data-rotate-z="300" data-rotate-order="xyz">
+                <div>
+                    <img src="images/sum_greater_than_parts.jpg" style="height: 100%; width: 100%; position: relative; " >
+                </div>
+                <div class="notes">
+                    <p>Aim for Site Reliability Engineering not to have Site Reliability Engineers!</p>
+                
+                </div>
+            </div>
+
+
+            <div id="just_enough" class="slide step sunBackgroundSettings"  data-x="-8200" data-y="1000" data-z="2000">
+                <div>
+                    <div class="topCentre redText"><b>"Just Enough" SRE: Requirements</b></div>
+                </div>
+                <ul class="bulletFont whiteText" style="list-style-type: disc; position: relative;top: 2em">
+                    <li class="substep">Focus on delivering application stability</li>
+                    <li class="substep">Error budget/observability</li>
+                    <li class="substep">Incident management/learning from incidents</li>
+                    <li class="substep">Blameless Post Mortems  </li>
+                    <li class="substep">Ability to push back/deny deployment</li>
+                    <li class="substep">Communication / Collaboration between teams</li>
+                </ul>
+                <div class="notes">
+                    <p>Focus</p>
+                    <p>Error Budget</p>
+                    <p>Incident management</p>
+                    <p>Post Mortem</p>
+                    <p>Push back</p>
+                    <p>Communication</p>
+                </div>
+            </div>
+
+            <div id="nice_to_have" class="slide step purpleBackgroundSettings" data-x="-1000" data-y="-1200" data-z="1000">
+                <div>
+                    <div class="topCentre redText"><b>"Just Enough" SRE: Nice To Haves</b></div>
+                </div>
+                <div></div>
+                <ul class="bulletFont whiteText" style="list-style-type: disc; position: relative;top: 2em">
+                    <li class="substep">Chaos Testing</li>
+                    <li class="substep">Capacity Planning</li>
+                    <li class="substep">Problem Management Database</li>
+                    <li class="substep">Ability to contribute application fixes</li>
+                    <li class="substep">"Keys to the Kingdom"</li>
+                    <li class="substep">Organizational agility to be able to refuse on call for an application</li>
+                </ul>
+                <div class="notes">
+                    <p>chaos</p>
+                    <p>capacity</p>
+                    <p>problem management</p>
+                    <p> can fix application</p>
+                    <p>all the keys</p>
+                    <p>org agility</p>
+                </div>
+            </div>
+
+
+            <div id="sre_book" class="step slide" data-x="2500" data-y="3600" data-z="600">
+                <div>
+                    <img src="images/google-sre.jpg" style="height: 100%; width: 70%; position: relative; left: 3em" >
+                </div>
+                <div></div>
+                <div class="notes">
+                    <p>The SRE book is the best and worst thing to happen to SRE</p>
+                    <p>Can lead to leadership to toss the book at a group and say "just do this"</p>
+                    <p>Make sure you know where you are going. Set a goal and head for it</p>
+                </div>
+            </div>
+            <div id="buy_in" class=" step " data-x="3000" data-y="1200" data-z="1100">
+                <div>
+                    <img src="images/buy-in.jpg" style="height: 100%; width: 100%; position: relative;" >
+                </div>
+                <div></div>
+                <div class="notes">
+                    <p>You need to have buy-in from all levels.</p>
+                    <p>If you have serious detractors the initiative is doomed to fail</p>
+                </div>
+            </div>
+            <div id="top_down" class=" step " data-x="0" data-y="4200" data-z="100">
+                <div>
+                    <img src="images/TopDownManagement.png" style="height: 100%; width: 100%; position: relative;" >
+                </div>
+                <div></div>
+                <div class="notes">
+                    <p>SRE doesn't thrive when handed top-down</p>
+                </div>
+            </div>
+            <div id="trust" class="slide step backgroundSettings " data-x="500" data-y="800" data-z="1100" data-rotate-x="180" data-rotate-y="00" data-rotate-z="300" data-rotate-order="xyz">
+                <div>
+                    <div class="topCentre whiteText"><b>Trust And Safety</b></div>
+                </div>
+                <div>
+                    <img src="images/trust.jpg" style="height: 90%; width: 90%; position: relative; left: 2em" >
+                </div>
+                <div class="notes">
+                    <p>Sometimes your initial job as a consultant is to play therapist.</p>
+                    <p>Some teams may not want to work with or trust each other</p>
+                    <p>Work towards a common goal can build trust and a sense of moving forward</p>
+                </div>
+            </div>
+
+            <div id="collab" class="slide step backgroundSettings " data-x="500" data-y="800" data-z="1100" data-rotate-x="90" data-rotate-y="90" data-rotate-z="90" data-rotate-order="xyz">
+                <div>
+                    <div class="topCentre whiteText"><b>Collaboration</b></div>
+                </div>
+                <div>
+                    <img src="images/collaboration.jpg" style="height: 90%; width: 90%; position: relative; left: 2em" >
+                </div>
+                <div class="notes">
+                    <p>Need to break down the silos</p>
+                    <p>A huge benefit from the SRE model is communication</p>
+                    <p>Collaboration is key to breaking down walls</p>
+                    <p>SRE cannot exist in a bubble</p>
+                </div>
+            </div>
+            <div id="thats_all" class="step " data-x="1500" data-y="2200" data-z="-6100">
+                <div>
+                    <img src="images/thats_all.gif" style="height: 90%; width: 90%; position: relative; left: 2em" >
+                </div>
+            </div>
             <!-- These load the actual JS. In this case a relative path to a js folder-->
             <script src="js/impress.js"></script>
             <script src="js/highlight.pack.js"></script>
