@@ -63,6 +63,12 @@
 
 }
 
+.redhatSpaceBackgroundSettings {
+    background-image: url("../backgrounds/redhat_space_background_1200x675.png");
+    height: 690px; 
+    width: 1200px;
+}
+
 .purpleBackgroundSettings{
     background-image: url("../backgrounds/purple_to_blue_background_1200x675.jpg");
     height: 900px; 

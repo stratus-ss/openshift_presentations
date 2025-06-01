@@ -28,24 +28,34 @@
         </div>
 
         <div id="impress" style="perspective: 1000px;">
-            <div id="intro" class="readhatSpaceBackgroundSettings step slide" data-x="-15000" data-y="5000" data-rotate="150">
+            <div id="intro" class="redhatSpaceBackgroundSettings step slide" data-x="-15000" data-y="5000" data-rotate="150">
                 <h1 style="text-align: center;" data-mce-style="text-align: center;">&nbsp;<br></h1><h1 style="text-align: center;" data-mce-style="text-align: center;">&nbsp;<br></h1><h1 style="text-align: center;" data-mce-style="text-align: center;">
                     <span style="font-size: 36pt; color: rgb(153, 51, 0)" data-mce-style="font-size: 36pt;">OpenShift 101:         
-                        <span style="color: darkblue;" data-mce-style="color: #993300;">Kubernetes Fundamentals </span> 
+                        <span style="color: darkblue;" data-mce-style="color: #993300;">Kubernetes Fundamentals </span> <br>
                         
                         <span style="color:rgb(153, 51, 0);"> From A Red Hat Perspective</span>
                         
                     </span><br>
                 </h1>
-                <p style="text-align: left;" >&nbsp;<br><br></p>
+                <p style="text-align: left;" >&nbsp;<br><br><br><br></p>
                 <p style="text-align: center;" >
-                    <span style="font-size: 18pt; color: black" >Steve Ovens <br></span>
-                    <span style="font-size: 18pt; color: black" >Sr. SRE Architect <br></span>
-                    <span style="font-size: 18pt; color:black" >June 2025</span>
+                    <span style="font-size: 18pt; color: white" >Steve Ovens <br></span>
+                    <span style="font-size: 18pt; color: white" >Sr. SRE Architect <br></span>
+                    <span style="font-size: 18pt; color:white" >June 2025</span>
                 </p>
                 <div class="notes">
                 </div>
             </div> 
+
+            <div id="agenda" class="step " data-x="-13000" data-y="5000" data-rotate="150">
+                <div>
+                    <img src="images/presentation_agenda.png" style="height: 100%; width: 100%; position: relative;" >                
+                </div>
+                <div class="notes">
+                </div>
+            </div> 
+
+
             <div id="problem_1" class="backgroundSettings step slide" data-x="0" data-y="0" data-z="0">
                 <div>
                     <img src="images/problem_statement.png" style="height: 100%; width: 100%; position: relative;" >                
@@ -305,9 +315,14 @@
                 </div>
             </div>
 
-            <div id="network_communications" class=" step " data-x="-1500" data-y="-6800" data-z="1100" data-rotate-x="180" data-rotate-y="00" data-rotate-z="300" data-rotate-order="xyz">
+            <div id="network_communications" class="slide step rippleBackgroundSettings" data-x="-1500" data-y="-6800" data-z="1100" data-rotate-x="180" data-rotate-y="00" data-rotate-z="300" data-rotate-order="xyz">
                 <div>
-                    <img src="images/network_communications.jpg" style="height: 100%; width: 120%; position: relative; right: 1em" >
+                    <h1 style="text-align: center;" data-mce-style="text-align: center;">
+                    <span style="font-size: 38pt; color:beige">Cluster Networking</span>
+                    </h1>
+                </div>
+                <div>
+                    <img src="images/network_communications.jpg" style="height: 85%; width: 100%; position: relative; " >
                 </div>
             </div>
 
@@ -332,136 +347,127 @@
                 </div>
             </div>
 
-            <div id="foundation" class="slide step rippleBackgroundSettings"  data-x="-8200" data-y="5000" data-z="4000">
-                <div class="topCentre whiteText"><b>Starting Off Right</b></div>
+            <div id="ingress" class="slide step rippleBackgroundSettings"  data-x="-8200" data-y="5000" data-z="4000">
+                <div class="topCentre whiteText"><b>Kubernetes Ingress</b></div>
                 <div>
-                    <img src="images/solid_foundation.jpg" style="height: 70%; width: 100%; position: relative; top: 2em; " >
+                    <img src="images/kubernetes_ingress.png" style="height: 70%; width: 100%; position: relative; top: 2em; " >
                 </div>
                 <div class="notes">
-                    <p>It’s important to determine whether there are foundations in place to build from. </p>
-                    <p>doing some discovery before proceeding is necessary in order to set the customer up for future success</p>
-                    <p>Cannot lay a path on completely uneven terrain</p>
+                    <p>* Used to get traffic into the cluster. </p>
+                    <p>* You need to setup your own controller (NGINX, Traefik etc)</p>
+                    <p>* The features you get are based on your ingress controller</p>
+                    <p>* Requires you to manage certificates (likely through something like CertManager)</p>
                 </div>
             </div>
 
-            <div id="sum_greater" class="slide step "  data-x="-8200" data-y="8000" data-z="4000" data-rotate-x="180" data-rotate-y="00" data-rotate-z="300" data-rotate-order="xyz">
+            <div id="routes" class="slide step rippleBackgroundSettings"  data-x="-8200" data-y="8000" data-z="4000" data-rotate-x="180" data-rotate-y="00" data-rotate-z="300" data-rotate-order="xyz">
+                <div class="topCentre whiteText"><b>OpenShift Routes</b></div>
                 <div>
-                    <img src="images/sum_greater_than_parts.jpg" style="height: 100%; width: 100%; position: relative; " >
+                    <img src="images/openshift_routes.png" style="height: 80%; width: 100%; position: relative; " >
                 </div>
                 <div class="notes">
-                    <p>Aim for Site Reliability Engineering not to have Site Reliability Engineers!</p>
+                    <p>* Uses HA-Proxy. </p>
+                    <p>* Tight integration and just works!</p>
+                    <p>* Can support TLS Edge, Passthrough of re-encrypt</p>
+                    <p>* Nice integration with the web UI for quick adjustments</p>
                 
                 </div>
             </div>
 
 
-            <div id="just_enough" class="slide step sunBackgroundSettings"  data-x="-8200" data-y="1000" data-z="2000">
+            <div id="route_comparison" class="slide step"  data-x="-8200" data-y="1000" data-z="2000">
                 <div>
-                    <div class="topCentre redText"><b>"Just Enough" SRE: Requirements</b></div>
+                    <img src="images/ingress_vs_routes.png" style="height: 120%; width: 120%; position: relative; bottom: 2em; right: 2em " >
                 </div>
-                <ul class="bulletFont whiteText" style="list-style-type: disc; position: relative;top: 2em">
-                    <li class="substep">Focus on delivering application stability</li>
-                    <li class="substep">Error budget/observability</li>
-                    <li class="substep">Incident management/learning from incidents</li>
-                    <li class="substep">Blameless Post Mortems  </li>
-                    <li class="substep">Ability to push back/deny deployment</li>
-                    <li class="substep">Communication / Collaboration between teams</li>
-                </ul>
                 <div class="notes">
-                    <p>Focus</p>
-                    <p>Error Budget</p>
-                    <p>Incident management</p>
-                    <p>Post Mortem</p>
-                    <p>Push back</p>
-                    <p>Communication</p>
+
                 </div>
             </div>
 
-            <div id="nice_to_have" class="slide step purpleBackgroundSettings" data-x="-1000" data-y="-1200" data-z="1000">
+            <div id="break_time" class=" step " data-x="-1000" data-y="-1200" data-z="1000">
                 <div>
-                    <div class="topCentre redText"><b>"Just Enough" SRE: Nice To Haves</b></div>
+                    <img src="images/break_time_agenda.png" style="height: 140%; width: 100%; position: relative; " >
                 </div>
                 <div></div>
-                <ul class="bulletFont whiteText" style="list-style-type: disc; position: relative;top: 2em">
-                    <li class="substep">Chaos Testing</li>
-                    <li class="substep">Capacity Planning</li>
-                    <li class="substep">Problem Management Database</li>
-                    <li class="substep">Ability to contribute application fixes</li>
-                    <li class="substep">"Keys to the Kingdom"</li>
-                    <li class="substep">Organizational agility to be able to refuse on call for an application</li>
-                </ul>
                 <div class="notes">
-                    <p>chaos</p>
-                    <p>capacity</p>
-                    <p>problem management</p>
-                    <p> can fix application</p>
-                    <p>all the keys</p>
-                    <p>org agility</p>
                 </div>
             </div>
 
 
-            <div id="sre_book" class="step slide" data-x="2500" data-y="3600" data-z="600">
+            <div id="add_storage" class="step " data-x="2500" data-y="3600" data-z="600">
                 <div>
-                    <img src="images/google-sre.jpg" style="height: 100%; width: 70%; position: relative; left: 3em" >
+                    <img src="images/adding_storage.png" style="height: 100%; width: 120%; position: relative; " >
                 </div>
                 <div></div>
                 <div class="notes">
-                    <p>The SRE book is the best and worst thing to happen to SRE</p>
-                    <p>Can lead to leadership to toss the book at a group and say "just do this"</p>
-                    <p>Make sure you know where you are going. Set a goal and head for it</p>
-                </div>
-            </div>
-            <div id="buy_in" class=" step " data-x="3000" data-y="1200" data-z="1100">
-                <div>
-                    <img src="images/buy-in.jpg" style="height: 100%; width: 100%; position: relative;" >
-                </div>
-                <div></div>
-                <div class="notes">
-                    <p>You need to have buy-in from all levels.</p>
-                    <p>If you have serious detractors the initiative is doomed to fail</p>
-                </div>
-            </div>
-            <div id="top_down" class=" step " data-x="0" data-y="4200" data-z="100">
-                <div>
-                    <img src="images/TopDownManagement.png" style="height: 100%; width: 100%; position: relative;" >
-                </div>
-                <div></div>
-                <div class="notes">
-                    <p>SRE doesn't thrive when handed top-down</p>
-                </div>
-            </div>
-            <div id="trust" class="slide step backgroundSettings " data-x="500" data-y="800" data-z="1100" data-rotate-x="180" data-rotate-y="00" data-rotate-z="300" data-rotate-order="xyz">
-                <div>
-                    <div class="topCentre whiteText"><b>Trust And Safety</b></div>
-                </div>
-                <div>
-                    <img src="images/trust.jpg" style="height: 90%; width: 90%; position: relative; left: 2em" >
-                </div>
-                <div class="notes">
-                    <p>Sometimes your initial job as a consultant is to play therapist.</p>
-                    <p>Some teams may not want to work with or trust each other</p>
-                    <p>Work towards a common goal can build trust and a sense of moving forward</p>
+                    <p>* pods are ephemeral, that means if they get deleted the data disappears</p>
+                    <p>* default storage is emptyDir unless otherwise specified</p>
                 </div>
             </div>
 
-            <div id="collab" class="slide step backgroundSettings " data-x="500" data-y="800" data-z="1100" data-rotate-x="90" data-rotate-y="90" data-rotate-z="90" data-rotate-order="xyz">
+            <div id="volumes" class="slide step " data-x="3000" data-y="1200" data-z="1100">
                 <div>
-                    <div class="topCentre whiteText"><b>Collaboration</b></div>
+                    <img src="images/persistent_volumes.png" style="height: 130%; width: 140%; position: relative; right: 4em; bottom: 3em" >
                 </div>
-                <div>
-                    <img src="images/collaboration.jpg" style="height: 90%; width: 90%; position: relative; left: 2em" >
-                </div>
+                <div></div>
                 <div class="notes">
-                    <p>Need to break down the silos</p>
-                    <p>A huge benefit from the SRE model is communication</p>
-                    <p>Collaboration is key to breaking down walls</p>
-                    <p>SRE cannot exist in a bubble</p>
+                    <p>* you need to define Persistent Volumes</p>
+                    <p>* * This essentially defines where to find the storage</p>
+                    <p>* these can be fc, hostPath, iscsi, local, nfs or csi (more on this later)</p>
+                    <p>* You can define capacity metadata like size of disk</p>
+                    <p>* You can indicate filesystem or block</p>
+                    <p>* You can choose from:</p>
+                    <p>* * ReadWriteOne (RWO): Can only be mounted to a single pod at a time</p>
+                    <p>* * ReadOnlyMany (ROX): ReadOnly to multiple pods at the same time</p>
+                    <p>* * ReadWriteMany (RWX): Multiple pods can read and write (side note, this is required for VM migration</p>
+                    <p>* IMPORTANT: the actual mode of the storage is enforced by the storage backend not Kubernetes! </p>
                 </div>
             </div>
-            <div id="thats_all" class="step " data-x="1500" data-y="2200" data-z="-6100">
+
+            <div id="claims" class="slide step " data-x="50" data-y="4800" data-z="100">
                 <div>
-                    <img src="images/thats_all.gif" style="height: 90%; width: 90%; position: relative; left: 2em" >
+                    <img src="images/pv_claim.png" style="height: 120%; width: 130%; position: relative;right: 4em; bottom: 2em" >
+                </div>
+                <div></div>
+                <div class="notes">
+                    <p>* Claims make a request of the storage system</p>
+                    <p>* The system matches the metadata provided by either PVs or the CSI provider</p>
+                    <p>* Claims are then referenced in the deployment specification when deploying an application</p>
+                    <p>* This will be familiar to anyone who has worked with volumes in Docker</p>
+                </div>
+            </div>
+
+            <div id="csi" class="slide step backgroundSettings " data-x="500" data-y="800" data-z="1100" data-rotate-x="180" data-rotate-y="00" data-rotate-z="300" data-rotate-order="xyz">
+                <div>
+                    <img src="images/csi_drivers.png" style="height: 115%; width: 115%; position: relative; bottom: 2em; right: 2em" >
+                </div>
+                <div class="notes">
+                    <p>* CSI drivers let kubernetes know how to interact with software defined storage</p>
+                    <p>* S3 (minio), OpenShift Data Foundation, NetApp and so on are examples</p>
+                    <p>* The system requests storage from the CSI driver which creates volumes on demand</p>
+                    <p>* This is done by creating a PVC that has the storage class defined in it</p>
+                </div>
+            </div>
+
+            <div id="dynamic_configuration" class="slide step backgroundSettings " data-x="500" data-y="800" data-z="1100" data-rotate-x="90" data-rotate-y="90" data-rotate-z="90" data-rotate-order="xyz">
+                <div>
+                    <img src="images/dynamic_configuration.png" style="height: 115%; width: 115%; position: relative; right: 2.5em; bottom: 2em" >
+                </div>
+                <div class="notes">
+                    <p>* There has to be an easier way to update a container's contents...</p>
+                </div>
+            </div>
+
+            <div id="config_maps" class="step slide" data-x="1500" data-y="2200" data-z="-6100">
+                <div>
+                    <img src="images/configMaps.png" style="height: 120%; width: 120%; position: relative; right: 2em; bottom: 2em" >
+                </div>
+                <div class="notes">
+                    <p>* You may want to make a container more generic</p>
+                    <p>* You can do this by injecting the configuration into the container</p>
+                    <p>* This is essentially mounting a file overtop of an existing one (or into a directory)</p>
+                    <p>* You don't have to rebuild a container to update a configuration file!</p>
+                    <p>* You can have an entire config file, env variables or even binary data</p>
                 </div>
             </div>
             <!-- These load the actual JS. In this case a relative path to a js folder-->
