@@ -152,3 +152,16 @@
 
 }
 
+.fade-out-slide.past {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.fade-in-slide {
+    opacity: 0 !important;
+    transition: opacity 1s ease-in-out !important;
+}
+
+.fade-in-slide.active {
+    opacity: 1 !important;
+}

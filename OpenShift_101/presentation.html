@@ -219,7 +219,7 @@
             </div>
 
             <div id="architecture" class="darkWithCracksSettings step slide" data-x="7000" data-y="1000" data-z="-4500" data-rotate="180">
-                <img src="images/transition_to_architecture.png" style="position: relative; height: 100%; width: 100%">
+                <img src="images/transition_to_architecture.png" style="position: relative; height: 120%; width: 120%; bottom: 2em; right: 2.5em">
                 <div class="notes">
                     <p>* So what do you have after the cluster is installed?</p>
                     <p>* Generally speaking you will have 3 control plane nodes</p>
@@ -231,26 +231,43 @@
             <div id="kublet" class="step" data-x="7500" data-y="2600" data-z="-5000" data-rotate="150">
                 <img src="images/kubelet_restaurant.jpg" style="position: relative; height: 100%; width: 100%">
                 <div class="notes">
-                    <p>* Runs on every worker node.</p>
-                    <p>* Responsible for joining the node to the cluster.</p>
-                    <p>* Establishes a connection with the control plane.</p>
-                    <p>* Runs containers on the node as specified by pod specs.</p>
-                    <p>* Ensures containers are running and healthy (using health checks like liveness and readiness probes)</p>
-                    <p>* In a restaurant there can be many chefs each one responsible for a specific section of the kitchen</p>
-                    <p>* * The kubelet is the prep cook. They know what food is being ordered and their job is to ensure that the raw ingredients start to be processed</p>
+                    <ul>
+                        <li>Runs on every worker node.</li>
+                        <li>Responsible for joining the node to the cluster.</li>
+                        <li>Establishes a connection with the control plane.</li>
+                        <li>Runs containers on the node as specified by pod specs.</li>
+                        <li>Ensures containers are running and healthy (using health checks like liveness and readiness probes)</li>
+                        <li>In a restaurant there can be many chefs each one responsible for a specific section of the kitchen
+                          <ul>
+                            <li>The kubelet is the chef. They know what food is being ordered and their job is to ensure that the raw ingredients start to be processed</li>
+                          </ul>
+                        </li>
+                      </ul>
+
                 </div>    
             </div>
 
 
-            <div id="openshift_node_security" class="step" data-x="8600" data-y="3100" data-z="-5500" data-rotate="120">
+            <div id="openshift_node_security" class="step fade-out-slide" data-x="8600" data-y="3100" data-z="-5500" data-rotate="120">
                 <img src="images/openshift_node_security_colour.png" style="position: relative; height: 100%; width: 100%">
                 <div class="notes">
-                    <p>* Node tries to join, issues certificate signing request</p>
-                    <p>* An admin needs to approve this to secure the cluster</p>
-                    <p>* Side note: certs are used for the internal cluster communication</p>
+                    <ul>
+                        <li>Node tries to join, issues certificate signing request</li>
+                        <li>An admin needs to approve this to secure the cluster</li>
+                        <li>Side note: certs are used for the internal cluster communication</li>
+                      </ul>
+                      
+                </div>    
+            </div>
+
+
+            <div id="openshift_node_security1" class="step fade-in-slide" data-x="8600" data-y="3100" data-z="-5500" data-rotate="120">
+                <img src="images/openshift_host_security.png" style="position: relative; height: 100%; width: 100%">
+                <div class="notes">
                     <p>* In a restaurant, this is essentially like requiring that all of the staff have badges with photo IDs</p>
                 </div>    
             </div>
+
 
             <div id="api" class="step" data-x="9600" data-y="2600" data-z="-6000" data-rotate="90">
                 <img src="images/api_endpoint.jpg" style="position: relative; height: 100%; width: 100%">
@@ -271,19 +288,36 @@
 
 
 
-            <div id="pods" class="step" data-x="11600" data-y="1500" data-z="-7000" data-rotate="50">
+            <div id="pods" class="step fade-out-slide" data-x="11600" data-y="1500" data-z="-7000" data-rotate="50">
                 <img src="images/pods.png" style="position: relative; height: 100%; width: 100%">
                 <div class="notes">
-                    <p>* smallest unit in k8s</p>
-                    <p>* abstraction around containers so that you can talk in a standard way, regardless of the container or container run time</p>
-                    <p>* usually only 1 application per pod</p>
-                    <p>* Pods share resources such as volumes and IP addresses</p>
-                    <p>* Complex applications may consist of multiple pods</p>
-                    <p>* Pods are ephemeral by nature</p>
-                    <p>* In a restaurant, pods are the chefs who combine all the wonderful ingredients to make you a meal!</p>
-                    <p>* * The do all the work of gathering the raw foods, preparing, cooking and plating the food</p>
+                    <ul>
+                        <li>smallest unit in k8s</li>
+                        <li>abstraction around containers so that you can talk in a standard way, regardless of the container or container run time</li>
+                        <li>usually only 1 application per pod</li>
+                        <li>Pods share resources such as volumes and IP addresses</li>
+                        <li>Complex applications may consist of multiple pods</li>
+                        <li>Pods are ephemeral by nature</li>
+                      </ul>
                 </div>    
             </div>
+
+
+            <div id="pods1" class="step fade-in-slide" data-x="11600" data-y="1500" data-z="-7000" data-rotate="50">
+                <img src="images/pod_restaurant.png" style="position: relative; height: 90%; width: 100%">
+                <div class="notes">
+                    <ul>
+                        <li>In a restaurant, pods are the cooked pieces of food
+                          <ul>
+                            <li>You might have a meat dish that comes with potatoes and broccoli. One pod is the meat, one pod is the potatoes and the other is the broccoli</li>
+                            <li>All of these are required to make a complete plate just like there might be multiple pods required to make a complete application</li>
+                          </ul>
+                        </li>
+                      </ul>
+                      
+                </div>    
+            </div>
+
 
             <div id="deployments" class="step" data-x="13600" data-y="1500" data-z="-7000" data-rotate="50">
                 <div>
@@ -291,16 +325,25 @@
                 </div>
  
                 <div class="notes">
-                    <p>* Declares desired state for pods</p>
-                    <p>* Includes things like: </p>
-                    <p>* * Networking </p>
-                    <p>* * Storage </p>
-                    <p>* * Number of replicas </p>
-                    <p>* * Health checks </p>
-                    <p>* * Number of replicas </p>
-                    <p>* * Resource Limits </p>
-                    <p>* In a restaurant, a deployment is like a note to the chef about how the customer wants a certain dish.</p>
-                    <p>* * If there are multiple people at the same table who want the dish, it also includes the number of servings to make</p>
+                    <ul>
+                        <li>Declares desired state for pods</li>
+                        <li>Includes things like:
+                          <ul>
+                            <li>Networking</li>
+                            <li>Storage</li>
+                            <li>Number of replicas</li>
+                            <li>Health checks</li>
+                            <li>Number of replicas (duplicate in your original, but included for completeness)</li>
+                            <li>Resource Limits</li>
+                          </ul>
+                        </li>
+                        <li>In a restaurant, a deployment is like a note to the chef about how the customer wants a certain dish.
+                          <ul>
+                            <li>If there are multiple people at the same table who want the dish, it also includes the number of servings to make</li>
+                          </ul>
+                        </li>
+                      </ul>
+                      
                 </div>    
             </div>
 
@@ -308,13 +351,19 @@
                 <div>
                     <img src="images/kubescheduler.jpg" style="height: 100%; width: 120%; position: relative; right: 1em" >
                 </div>
-                <<div class="notes">
-                    <p>* Watches for new pod objects not already assigned</p>
-                    <p>* Looks at cpu/ram/affinity and places the pod on a node</p>
-                    <p>* * Filters for appropriate nodes</p>
-                    <p>* * Ranks the nodes</p>
-                    <p>* * Assigns node to highest ranking node</p>
-                    <p>* In a restaurant the scheduler is the person who takes reservations and decides which party will be seated at which table</p>
+                <div class="notes">
+                    <ul>
+                        <li>Watches for new pod objects not already assigned</li>
+                        <li>Looks at cpu/ram/affinity and places the pod on a node
+                          <ul>
+                            <li>Filters for appropriate nodes</li>
+                            <li>Ranks the nodes</li>
+                            <li>Assigns node to highest ranking node</li>
+                          </ul>
+                        </li>
+                        <li>In a restaurant the scheduler is the person who takes reservations and decides which party will be seated at which table</li>
+                      </ul>
+                      
                 </div>
             </div>
 
@@ -336,10 +385,13 @@
                     <img src="images/kubernetes_ingress.png" style="height: 70%; width: 100%; position: relative; top: 2em; " >
                 </div>
                 <div class="notes">
-                    <p>* Used to get traffic into the cluster. </p>
-                    <p>* You need to setup your own controller (NGINX, Traefik etc)</p>
-                    <p>* The features you get are based on your ingress controller</p>
-                    <p>* Requires you to manage certificates (likely through something like CertManager)</p>
+                    <ul>
+                        <li>Used to get traffic into the cluster.</li>
+                        <li>You need to setup your own controller (NGINX, Traefik etc)</li>
+                        <li>The features you get are based on your ingress controller</li>
+                        <li>Requires you to manage certificates (likely through something like CertManager)</li>
+                      </ul>
+                      
                 </div>
             </div>
 
@@ -349,35 +401,48 @@
                     <img src="images/openshift_routes.png" style="height: 80%; width: 100%; position: relative; " >
                 </div>
                 <div class="notes">
-                    <p>* Uses HA-Proxy. </p>
-                    <p>* Tight integration and just works!</p>
-                    <p>* Can support TLS Edge, Passthrough of re-encrypt</p>
-                    <p>* Nice integration with the web UI for quick adjustments</p>
-                    <p>* A route is like a menu that you pick your items from</p>
-                    <p>* * When you order a specific dish it may have many things that need to be done before the end product is available</p>
-                    <p>* * Each dish might have special chefs assigned to making them</p>
-                
+                    <ul>
+                        <li>Uses HA-Proxy.</li>
+                        <li>Tight integration and just works!</li>
+                        <li>Can support TLS Edge, Passthrough or re-encrypt</li>
+                        <li>Nice integration with the web UI for quick adjustments</li>
+                        <li>A route is like a menu that you pick your items from
+                          <ul>
+                            <li>When you order a specific dish it may have many things that need to be done before the end product is available</li>
+                            <li>Each dish might have special chefs assigned to making them</li>
+                          </ul>
+                        </li>
+                      </ul>
+                                   
                 </div>
             </div>
 
 
-            <div id="route_comparison" class="slide step"  data-x="-8200" data-y="1000" data-z="2000">
+            <!-- <div id="route_comparison" class="slide step"  data-x="-8200" data-y="1000" data-z="2000">
                 <div>
                     <img src="images/ingress_vs_routes.png" style="height: 120%; width: 120%; position: relative; bottom: 2em; right: 2em " >
                 </div>
                 <div class="notes">
 
                 </div>
-            </div>
+            </div> -->
 
             <div id="services" class=" step "  data-x="-9600" data-y="5000" data-z="4000" >
                 <div>
                     <img src="images/services_routes_restaurant.png" style="height: 100%; width: 100%; position: relative; " >
                 </div>
                 <div class="notes">
-                    <p>* while every pod gets an ip, that ip is not constant</p>
-                    <p>* therefore a service is like an internal dns entry</p>
-                    <p>* except multiple pods can be part of the same service</p>
+                    <ul>
+                        <li>while every pod gets an ip, that ip is not constant</li>
+                        <li>therefore a service is like an internal dns entry</li>
+                        <li>except multiple pods can be part of the same service</li>
+                        <li>In a restaurant the service is like the wait staff who know which chef should receive which order
+                          <ul>
+                            <li>A pastry chef should not handle making salads. The wait staff knows this</li>
+                          </ul>
+                        </li>
+                      </ul>
+                      
                 </div>
             </div>
 
@@ -386,10 +451,16 @@
                     <img src="images/kube_proxy.png" style="height: 100%; width: 120%; position: relative; right: 2em" >                
                 </div>
                 <div class="notes">
-                    <p>* Its a proxy that runs on every node</p>
-                    <p>* implements kubernetes service </p>
-                    <p>* In a restaurant, this is like the computer program that takes the orders from the wait staff (services) </p>
-                    <p>* * this computer program ensures it is displayed on the correct screen in front of the appropriate chef</p>
+                    <ul>
+                        <li>Its a proxy that runs on every node</li>
+                        <li>implements kubernetes service</li>
+                        <li>In a restaurant, this is like the computer program that takes the orders from the wait staff (services)
+                          <ul>
+                            <li>this computer program ensures it is displayed on the correct screen in front of the appropriate chef</li>
+                          </ul>
+                        </li>
+                      </ul>
+                      
                 </div>
             </div>
 
@@ -420,16 +491,7 @@
                 </div>
                 <div></div>
                 <div class="notes">
-                    <p>* you need to define Persistent Volumes</p>
-                    <p>* * This essentially defines where to find the storage</p>
-                    <p>* these can be fc, hostPath, iscsi, local, nfs or csi (more on this later)</p>
-                    <p>* You can define capacity metadata like size of disk</p>
-                    <p>* You can indicate filesystem or block</p>
-                    <p>* You can choose from:</p>
-                    <p>* * ReadWriteOne (RWO): Can only be mounted to a single pod at a time</p>
-                    <p>* * ReadOnlyMany (ROX): ReadOnly to multiple pods at the same time</p>
-                    <p>* * ReadWriteMany (RWX): Multiple pods can read and write (side note, this is required for VM migration</p>
-                    <p>* IMPORTANT: the actual mode of the storage is enforced by the storage backend not Kubernetes! </p>
+                   
                 </div>
             </div>
 
@@ -439,10 +501,25 @@
                 </div>
                 <div></div>
                 <div class="notes">
-                    <p>* Claims make a request of the storage system</p>
-                    <p>* The system matches the metadata provided by either PVs or the CSI provider</p>
-                    <p>* Claims are then referenced in the deployment specification when deploying an application</p>
-                    <p>* This will be familiar to anyone who has worked with volumes in Docker</p>
+                    <ul>
+                        <li>you need to define Persistent Volumes
+                          <ul>
+                            <li>This essentially defines where to find the storage</li>
+                          </ul>
+                        </li>
+                        <li>these can be fc, hostPath, iscsi, local, nfs or csi (more on this later)</li>
+                        <li>You can define capacity metadata like size of disk</li>
+                        <li>You can indicate filesystem or block</li>
+                        <li>You can choose from:
+                          <ul>
+                            <li>ReadWriteOne (RWO): Can only be mounted to a single pod at a time</li>
+                            <li>ReadOnlyMany (ROX): ReadOnly to multiple pods at the same time</li>
+                            <li>ReadWriteMany (RWX): Multiple pods can read and write (side note, this is required for VM migration)</li>
+                          </ul>
+                        </li>
+                        <li>IMPORTANT: the actual mode of the storage is enforced by the storage backend not Kubernetes!</li>
+                      </ul>
+                      
                 </div>
             </div>
 
@@ -451,10 +528,19 @@
                     <img src="images/csi_drivers.png" style="height: 115%; width: 115%; position: relative; bottom: 2em; right: 2em" >
                 </div>
                 <div class="notes">
-                    <p>* CSI drivers let kubernetes know how to interact with software defined storage</p>
-                    <p>* S3 (minio), OpenShift Data Foundation, NetApp and so on are examples</p>
-                    <p>* The system requests storage from the CSI driver which creates volumes on demand</p>
-                    <p>* This is done by creating a PVC that has the storage class defined in it</p>
+                    <ul>
+                        <li>CSI drivers let kubernetes know how to interact with software defined storage
+                          <ul>
+                            <li>S3 (minio), OpenShift Data Foundation, NetApp and so on are examples</li>
+                          </ul>
+                        </li>
+                        <li>The system requests storage from the CSI driver which creates volumes on demand
+                          <ul>
+                            <li>This is done by creating a PVC that has the storage class defined in it</li>
+                          </ul>
+                        </li>
+                      </ul>
+                      
                 </div>
             </div>
 
@@ -472,13 +558,19 @@
                     <img src="images/configMaps.png" style="height: 120%; width: 120%; position: relative; right: 2em; bottom: 2em" >
                 </div>
                 <div class="notes">
-                    <p>* You may want to make a container more generic</p>
-                    <p>* You can do this by injecting the configuration into the container</p>
-                    <p>* This is essentially mounting a file overtop of an existing one (or into a directory)</p>
-                    <p>* You don't have to rebuild a container to update a configuration file!</p>
-                    <p>* You can have an entire config file, env variables or even binary data</p>
-                    <p>* in a restaurant if you have instructions to cook eggs</p>
-                    <p>* * You might have the time each side should be cooked written down. By increasing or lessening the time you get over-easy, over-med or over-hard</p>
+                    <ul>
+                        <li>You may want to make a container more generic</li>
+                        <li>You can do this by injecting the configuration into the container</li>
+                        <li>This is essentially mounting a file overtop of an existing one (or into a directory)</li>
+                        <li>You don't have to rebuild a container to update a configuration file!</li>
+                        <li>You can have an entire config file, env variables or even binary data</li>
+                        <li>in a restaurant if you have instructions to cook eggs
+                          <ul>
+                            <li>You might have the time each side should be cooked written down. By increasing or lessening the time you get over-easy, over-med or over-hard</li>
+                          </ul>
+                        </li>
+                      </ul>
+                      
                 </div>
             </div>
 
@@ -492,14 +584,23 @@
                     <img src="images/kubernetes_secret_restaurant.png" style="height: 120%; width: 120%; position: relative; bottom: 2em; right: 2em " >
                 </div>
                 <div class="notes">
-                    <p>* Sometimes you need to inject sensitive information into your pod</p>
-                    <p>* Sometimes you need white-space accurate data in your pod</p>
-                    <p>* Secrets do not reside on the node's disk (tmpfs)</p>
-                    <p>* They are very similar in use to configMaps</p>
-                    <p>* The dirty secret about secrets is, they are not secret</p>
-                    <p>* * they are just base64 encoded</p>
-                    <p>* In a restaurant, secrets are like recipes for special dishes that are locked up in the office</p>
-                    <p>* * Anyone who has a key to the office can read the recipes</p>
+                    <ul>
+                        <li>Sometimes you need to inject sensitive information into your pod</li>
+                        <li>Sometimes you need white-space accurate data in your pod</li>
+                        <li>Secrets do not reside on the node's disk (tmpfs)</li>
+                        <li>They are very similar in use to configMaps</li>
+                        <li>The dirty secret about secrets is, they are not secret
+                          <ul>
+                            <li>they are just base64 encoded</li>
+                          </ul>
+                        </li>
+                        <li>In a restaurant, secrets are like recipes for special dishes that are locked up in the office
+                          <ul>
+                            <li>Anyone who has a key to the office can read the recipes</li>
+                          </ul>
+                        </li>
+                      </ul>
+                      
                 </div>
             </div>
 
@@ -509,16 +610,22 @@
                 </div>
                 <div></div>
                 <div class="notes">
-                    <p>* You probably should use a centralized service to manage secrets</p>
-                    <p>* Hashicorp Vault is the standard for secret management</p>
-                    <p>* There is tight integration with OpenShift</p>
-                    <p>* There is a version up on GitHub. It's a source available license</p>
-                    <p>* * However 4 years after release it changes to the Mozilla Public License 2.0</p>
-                    <p>* ESO vs VSO</p>
-                    <p>* VSO can rotate secrets and redeploy</p>
-                    <p>* VSO can revoke tokens/credentials</p>
-                    <p>* VSO has its own prometheus metrics</p>
-                    <p>* Has multiple types of secrets (KV, dynamic, pki)</p>
+                    <ul>
+                        <li>You probably should use a centralized service to manage secrets</li>
+                        <li>Hashicorp Vault is the standard for secret management</li>
+                        <li>There is tight integration with OpenShift</li>
+                        <li>There is a version up on GitHub. It's a source available license
+                          <ul>
+                            <li>However 4 years after release it changes to the Mozilla Public License 2.0</li>
+                          </ul>
+                        </li>
+                        <li>ESO vs VSO</li>
+                        <li>VSO can rotate secrets and redeploy</li>
+                        <li>VSO can revoke tokens/credentials</li>
+                        <li>VSO has its own prometheus metrics</li>
+                        <li>Has multiple types of secrets (KV, dynamic, pki)</li>
+                      </ul>
+                      
                 </div>
             </div>
 
@@ -539,18 +646,19 @@
                 </div>
                 <div></div>
                 <div class="notes">
-                    <p>* SELinux enforces access controls on all processes within OpenShift only giving access resources they are explicitly allowed to use</p>
-                    <p>* Even if a container is compromised, SELinux prevents it from accessing sensitive files or processes outside its designated boundaries</p>
-                    <p>* SELinux implements the principle of least privilege, automatically restricting applications and processes to only what they need to function.</p>
-                    <p>* By default, OpenShift labels and isolates all container processes and files</p>
-                    <p>* You can indicate filesystem or block</p>
-                    <p>* You can choose from:</p>
-                    <p>* * ReadWriteOne (RWO): Can only be mounted to a single pod at a time</p>
-                    <p>* * ReadOnlyMany (ROX): ReadOnly to multiple pods at the same time</p>
-                    <p>* * ReadWriteMany (RWX): Multiple pods can read and write (side note, this is required for VM migration</p>
-                    <p>* IMPORTANT: the actual mode of the storage is enforced by the storage backend not Kubernetes! </p>
-                    <p>* In a restaurant, imagine that each chef has their own work station with their own ingrediants. </p>
-                    <p>* * SELinux is there to make sure that a chef cannot go take things from another work station</p>
+                    <ul>
+                        <li>SELinux enforces access controls on all processes within OpenShift only giving access resources they are explicitly allowed to use</li>
+                        <li>Even if a container is compromised, SELinux prevents it from accessing sensitive files or processes outside its designated boundaries</li>
+                        <li>SELinux implements the principle of least privilege, automatically restricting applications and processes to only what they need to function.</li>
+                        <li>By default, OpenShift labels and isolates all container processes and files</li>
+                        <li>You can indicate filesystem or block</li>
+                        <li>In a restaurant, imagine that each chef has their own work station with their own ingrediants.
+                          <ul>
+                            <li>SELinux is there to make sure that a chef cannot go take things from another work station</li>
+                          </ul>
+                        </li>
+                      </ul>
+                      
                 </div>
             </div>
 
@@ -560,11 +668,14 @@
                 </div>
                 <div></div>
                 <div class="notes">
-                    <p>* K8s: Root Allowed By default </p>
-                    <p>* K8s: can bind to any port if root container</p>
-                    <p>* K8s: non-restrictive by default</p>
-                    <p>* OCP: non-root, random UID above 1000000 by default</p>
-                    <p>* OCP: More secure by default, need to take specific action to run as non-root</p>
+                    <ul>
+                        <li>K8s: Root Allowed By default</li>
+                        <li>K8s: can bind to any port if root container</li>
+                        <li>K8s: non-restrictive by default</li>
+                        <li>OCP: non-root, random UID above 1000000 by default</li>
+                        <li>OCP: More secure by default, need to take specific action to run as non-root</li>
+                      </ul>
+                      
                 </div>
             </div>
 
@@ -573,14 +684,23 @@
                     <img src="images/openshift_requests.png" style="height: 115%; width: 115%; position: relative; bottom: 2em; right: 2em" >
                 </div>
                 <div class="notes">
-                    <p>* Think of a restaurant</p>
-                    <p>* Requests = Your Reservation</p>
-                    <p>* * You book a table for a certain number of people</p>
-                    <p>* * The kube scheduler decides which table in the restaurant has enough seats for your party</p>
-                    <p>* Limits = Maximum party size</p>
-                    <p>* You cannot have more people at your table than you have in your reservation</p>
-                    <p>* * If one table attempts to seat too many people, they are asked to leave (the pod is killed)</p>
-                    <p>* * This prevents one party from overwhelming the entire restaurant</p>
+                    <ul>
+                        <li>Think of a restaurant</li>
+                        <li>Requests = Your Reservation
+                          <ul>
+                            <li>You book a table for a certain number of people</li>
+                            <li>The kube scheduler decides which table in the restaurant has enough seats for your party</li>
+                          </ul>
+                        </li>
+                        <li>Limits = Maximum party size</li>
+                        <li>You cannot have more people at your table than you have in your reservation
+                          <ul>
+                            <li>If one table attempts to seat too many people, they are asked to leave (the pod is killed)</li>
+                            <li>This prevents one party from overwhelming the entire restaurant</li>
+                          </ul>
+                        </li>
+                      </ul>
+                      
                 </div>
             </div>
 
@@ -589,39 +709,97 @@
                     <img src="images/etcd.png" style="height: 160%; width: 115%; position: relative; right: 2em; bottom: 6em" >
                 </div>
                 <div class="notes">
-                    <p>* ETCD is a clustered database that tracks everything about the cluster</p>
-                    <p>* Every query in the cluster goes to ETCD as the source of truth</p>
-                    <p>* in a restaurant, ETCD is like the ledger of all of the current details of patrons in the building</p>
-                    <p>* * what food has been delivered</p>
-                    <p>* * how many tables you have (and how many are full)</p>
+                    <ul>
+                        <li>ETCD is a clustered database that tracks everything about the cluster</li>
+                        <li>Every query in the cluster goes to ETCD as the source of truth</li>
+                        <li>in a restaurant, ETCD is like the ledger of all of the current details of patrons in the building
+                          <ul>
+                            <li>what food has been delivered</li>
+                            <li>how many tables you have (and how many are full)</li>
+                          </ul>
+                        </li>
+                      </ul>
+                      
                 </div>
             </div>
 
             <div id="controller_manager" class="step slide" data-x="7500" data-y="2200" data-z="-6100">
                 <div>
-                    <img src="images/controller_manager.png" style="height: 120%; width: 120%; position: relative; right: 2em; bottom: 2em" >
+                    <img src="images/controller_manager.png" style="height: 140%; width: 120%; position: relative; right: 2em; bottom: 4em" >
                 </div>
                 <div class="notes">
-                    <p>* This is a broad term used to describe many discrete controllers (replication, node, service etc) </p>
-                    <p>* You can think of this like a restaurant manager</p>
-                    <p>* The wait staff (the API) input the orders into the computer (etcd)</p>
-                    <p>* * The manager looks at the orders on the computer</p>
-                    <p>* * But they also check with the cooks to see what has actually been prepared</p>
-                    <p>* * If an order needs to be filled, or if a plate is spilled, the manager assigns the task of making the food to a chef (the scheduler)</p>
-                    <p>* * This way the staff stay efficient and only have to worry about fulfilling the direct duties of their job</p>
+                    <ul>
+                        <li>This is a broad term used to describe many discrete controllers (replication, node, service etc)</li>
+                        <li>You can think of this like a restaurant manager</li>
+                        <li>The wait staff (the API) input the orders into the computer (etcd)
+                          <ul>
+                            <li>The manager looks at the orders on the computer</li>
+                            <li>But they also check with the cooks to see what has actually been prepared</li>
+                            <li>If an order needs to be filled, or if a plate is spilled, the manager assigns the task of making the food to a chef (the scheduler)</li>
+                            <li>This way the staff stay efficient and only have to worry about fulfilling the direct duties of their job</li>
+                          </ul>
+                        </li>
+                      </ul>
+                      
                 </div>
             </div>
 
+            <div id="summary" class="step slide" data-x="11500" data-y="4500" data-z="-6100">
+                <div>
+                    <img src="images/summary.png" style="height: 120%; width: 120%; position: relative; right: 2em; bottom: 2em" >
+                </div>
+                <div class="notes">
+                    <p>
+                        In our restaurant analogy for OpenShift, every component plays a vital role in delivering a smooth and secure dining experience:
+                      </p>
+                      <ul>
+                        <li><strong>Kubelet:</strong> The chef at each kitchen station, responsible for preparing dishes (pods) as ordered.</li>
+                        <li><strong>Node CSRs:</strong> Staff badges—ensuring everyone is authenticated before joining the team.</li>
+                        <li><strong>Pods:</strong> Individual dishes or plates, each potentially made up of multiple components (containers) that work together.</li>
+                        <li><strong>Deployments:</strong> Recipe cards that tell the kitchen how many of each dish to keep ready and how to respond to changes.</li>
+                        <li><strong>Scheduler:</strong> The hostess, assigning tables (nodes) to parties (pods) based on availability.</li>
+                        <li><strong>Routes:</strong> The menu indicating all the available dishes (applications).</li>
+                        <li><strong>Services:</strong> The wait staff, directing orders to the right chefs and kitchens.</li>
+                        <li><strong>Kube-proxy:</strong> The computer program, ensuring orders reach the right chef’s screen for preparation.</li>
+                        <li><strong>ConfigMaps:</strong> Open recipe books with everyday instructions, available to all chefs.</li>
+                        <li><strong>Secrets:</strong> Locked office with special recipes, accessible only to authorized staff.</li>
+                        <li><strong>SELinux:</strong> Security guard ensuring chefs only use their own ingredients and workstations.</li>
+                        <li><strong>Resource Limits:</strong> Table reservations and maximum party sizes—preventing any group from overwhelming the restaurant.</li>
+                        <li><strong>ETCD:</strong> The restaurant ledger, tracking all orders, tables, and current status.</li>
+                        <li><strong>Controller Manager:</strong> The restaurant manager, coordinating staff and ensuring orders are fulfilled efficiently.</li>
+                      </ul>
+                      <p>
+                        Together, these components create a secure, scalable, and reliable platform—just like a well-run restaurant ensures every guest has a great experience!
+                      </p>
+                </div>
+            </div>
 
+            <div id="things_to_think_about" class="step slide" data-x="11500" data-y="2700" data-z="-6500">
+                <div>
+                    <img src="images/things_to_think_about.png" style="height: 120%; width: 120%; position: relative; right: 2.1em; bottom: 2em" >
+                </div>
+                <div class="notes">
+                    <ul>
+                        <li>Going Beyond 101: You may also care about</li>
+                        <li>Build in identity providers: LDAP/AD, Github, Gitlab, Google, OpenID, Keystone and more</li>
+                        <li>Easy Management with built in full featured web UI</li>
+                        <li>The Loki stack backed in for observability</li>
+                        <li>Pre-baked Logging stack</li>
+                        <li>Multi-cluster management with ACM</li>
+                        <li>Support for Air-gapped installation</li>
+                      </ul>
+                      
+                </div>
+            </div>
 
+            <div id="end" class="step slide" data-x="13500" data-y="2700" data-z="-6500">
+                <div>
+                    <img src="images/goodbye.jpg" style="height: 120%; width: 120%; position: relative; right: 2.1em; bottom: 2em" >
+                </div>
+                <div class="notes">
 
-
-
-
-
-
-
-
+                </div>
+            </div>
 
             <!-- These load the actual JS. In this case a relative path to a js folder-->
             <script src="js/impress.js"></script>
